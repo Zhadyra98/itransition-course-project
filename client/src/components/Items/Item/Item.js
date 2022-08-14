@@ -28,7 +28,7 @@ const Item = ({ item, setCurrentId }) => {
             </div>
             <Typography variant="h5" gutterBottom>{item.title}</Typography>
             <CardContent>
-                <Typography variant="h5" gutterBottom>{item.message}</Typography>
+                <Typography variant="body2" color="textSecondary" component="p">{item.message}</Typography>
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={() => dispatch(likeItem(item._id)) }>

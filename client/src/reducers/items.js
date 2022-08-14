@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 export default (items = [], action) => {
     switch (action.type) {
         case 'FETCH_ALL':

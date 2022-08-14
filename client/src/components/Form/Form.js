@@ -9,7 +9,7 @@ const Form = ({ currentId, setCurrentId }) => {
     const [ itemData, setItemData ] = useState({
         creator: '', title: '', message: '', tags: '', selectedFile: ''
     })
-    const item = useSelector((state) => currentId ? state.items.find((p) => p._id == currentId) : null);
+    const item = useSelector((state) => currentId ? state.items.find((p) => p._id === currentId) : null);
 
     const dispatch = useDispatch();
 
@@ -65,7 +65,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     label="Tags"
                     fullWidth
                     value={itemData.tags} 
-                    onChange={(e) => setItemData({ ...itemData, tags: e.target.value })}
+                    onChange={(e) => setItemData({ ...itemData, tags: e.target.value.split(',') })}
                 />
                 <div>
                     <FileBase
