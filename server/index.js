@@ -6,10 +6,11 @@ import itemRoutes from './routes/items.js'
 
 const app = express();
 
-app.use('/items', itemRoutes);
 app.use(bodyParser.json({ limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}))
 app.use(cors());
+
+app.use('/items', itemRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://Zhadyra:itisNew123!@cluster0.x8rjlug.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000;
