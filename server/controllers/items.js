@@ -14,7 +14,7 @@ export const getItems = async (req, res) => {
 export const createItem = async (req, res) => {
     const item = req.body;
 
-    const newItem = new ItemMessage(item)
+    const newItem = new ItemMessage({ ...item, creator: req.userId, createdAt: new Date().toISOString()});
 
     try {
         await newItem.save();
@@ -45,9 +45,17 @@ export const deleteItem = async (req, res) => {
 
 export const likeItem = async (req, res) => {
     const { id:_id } = req.params;
+    if(!req.userId) return res.json({ message: "Unauthenticated" });
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(400).send("No item with that id");
     const item = await ItemMessage.findById(_id);
-    const updatedItem = await ItemMessage.findByIdAndUpdate(_id, { likeCount: item.likeCount + 1 }, { new: true });
-
+    const index = item.likes.findIndex((_id) => _id === String(req.userId));
+    console.log(req.userId);
+    console.log(item.likes);
+    if(index === -1) {
+        item.likes.push(req.userId);
+    } else {
+        item.likes = item.likes.filter(_id => _id !== String(req.userId));
+    }
+    const updatedItem = await ItemMessage.findByIdAndUpdate(_id, item, { new: true });
     res.json(updatedItem);
 }

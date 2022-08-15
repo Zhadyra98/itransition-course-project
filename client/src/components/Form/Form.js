@@ -6,11 +6,9 @@ import { createItem, updateItem } from '../../actions/items'
 
 
 const Form = ({ currentId, setCurrentId }) => {
-    const [ itemData, setItemData ] = useState({
-        creator: '', title: '', message: '', tags: '', selectedFile: ''
-    })
+    const [ itemData, setItemData ] = useState({ title: '', message: '', tags: '', selectedFile: '' });
     const item = useSelector((state) => currentId ? state.items.find((p) => p._id === currentId) : null);
-
+    const user = JSON.parse(localStorage.getItem('profile'));
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -20,29 +18,31 @@ const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(currentId){
-            dispatch(updateItem(currentId, itemData))
+            dispatch(updateItem(currentId, { ...itemData, name: user?.result?.name} ))
         } else {
-            dispatch(createItem(itemData))
+            dispatch(createItem({ ...itemData, name: user?.result?.name}));
         }
         clear();
     }
     const clear = () => {
         setCurrentId(null);
-        setItemData({ creator: '', title: '', message: '', tags: '', selectedFile: ''});
+        setItemData({ title: '', message: '', tags: '', selectedFile: ''});
+    }
+
+    if(!user?.result?.name) {
+        return (
+            <Paper>
+                <Typography variant="h6" align="center">
+                    Please Sign In to create your own items and like other's.
+                </Typography>
+            </Paper>
+        )
     }
 
     return (
         <Paper>
             <form autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} an item</Typography>
-                <TextField 
-                    name="creator" 
-                    variant="outlined" 
-                    label="Creator"
-                    fullWidth
-                    value={itemData.creator} 
-                    onChange={(e) => setItemData({ ...itemData, creator: e.target.value })}
-                />
                 <TextField 
                     name="title" 
                     variant="outlined" 

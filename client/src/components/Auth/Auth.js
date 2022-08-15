@@ -23,7 +23,7 @@ export default function Auth() {
     }
     const switchMode = () => { 
         setIsSignUp(prev => !prev);
-        handleShowPassword(false);
+        setShowPassword(false);
     }
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name] : e.target.value })
@@ -68,7 +68,7 @@ export default function Auth() {
                         }
                         <Input name="email" label="Email Address" handleChange={handleChange} type="email"/>
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
-                        { isSignup &&  <Input name="confirmPassword" label="Confirm Password" handleChange={handleChange}/> }
+                        { isSignup &&  <Input name="confirmPassword" label="Confirm Password" type="password" handleChange={handleChange}/> }
                     </Grid>
                     <Button type="submit" fullWidth variant='contained' color="primary">
                         { isSignup ? 'Sign Up' : 'Sign In'}

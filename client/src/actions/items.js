@@ -10,6 +10,15 @@ export const getItems = () =>  async (dispatch) => {
     }
 }
 
+export const getItemsBySearch = (searchQuery) => async (dispatch) => {
+    try {
+        const { data } = await api.fetchItemsBySearch(searchQuery);
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const createItem = (item) => async (dispatch) => {
     try{
         const { data } = await api.createItem(item);

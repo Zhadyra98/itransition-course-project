@@ -3,6 +3,7 @@ import {  AppBar, Avatar, Button, Typography, Toolbar } from '@mui/material'
 import useStyles from '../../styles';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 
 const Navbar = () => {
     const classes = useStyles();
@@ -19,6 +20,10 @@ const Navbar = () => {
     
     useEffect(() => {
         const token = user?.token;
+        if(token) {
+            const decodedToken = decode(token);
+            if(decodedToken.exp * 1000 < new Date().getTime()) handleLogout();
+        }
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location]);
     return(
