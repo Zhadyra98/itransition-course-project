@@ -9,7 +9,7 @@ API.interceptors.request.use((req) => {
     return req;
 });
 
-export const fetchItems = () => API.get('/items');
+export const fetchItems = (page) => API.get(`/items?page=${page}`);
 export const fetchItemsBySearch = (searchQuery) => API.get(`/items/search?searchQuery=${searchQuery.search || 'none'}`);
 export const createItem = (newItem) => API.post('/items', newItem);
 export const updateItem = (id, updatedItem) => API.patch(`/items/${id}`, updatedItem);

@@ -2,12 +2,30 @@ import mongoose from "mongoose";
 import ItemMessage from "../models/itemMessage.js";
 
 export const getItems = async (req, res) => {
+    const { page } = req.query;
     try {
-        const itemMessages = await ItemMessage.find();
+        const LIMIT = 4 ;
+        const startIndex = (Number(page) - 1) * LIMIT;
+        const total = await ItemMessage.countDocuments({});
 
-        res.status(200).json(itemMessages);
+        const items = await ItemMessage.find().sort({ _id: -1}).limit(LIMIT).skip(startIndex);
+
+        res.status(200).json({ data: items, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT) });
     } catch(error){
         res.status(400).json({message: error.message})
+    }
+}
+
+export const getItemsBySearch = async (req, res) => {
+    const { searchQuery } = req.query;
+    try {
+        const title = new RegExp(searchQuery, 'i');
+        const message = new RegExp(searchQuery, 'i');
+        const items = await ItemMessage.find({ $or:[ {title } , {message}]} );
+        res.json({ data: items });
+
+    } catch (error) {
+        res.status(404).json({ message: error.message });
     }
 }
 

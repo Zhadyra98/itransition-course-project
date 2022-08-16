@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase } from "@mui/material";
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import moment from 'moment'
 import { useDispatch } from 'react-redux'
@@ -25,27 +24,33 @@ const Item = ({ item, setCurrentId }) => {
         }
         return <><ThumbUpOffAltIcon fontSize="small"/>&nbsp;Like</>
     }
+
+    const openItem = () => {
+
+    }
     return (
         <Card>  
-            <CardMedia image={item.selectedFile} title={item.title}/>
-            <div>
-                <Typography variant="h6">{item.name}</Typography>
-                <Typography variant="body2">{moment(item.createdAt).fromNow()}</Typography>
-            </div>
-            {(user?.result?.googleId === item?.creator || user?.result?._id === item?.creator) && (
+            <ButtonBase onClick={openItem}>
+                <CardMedia image={item.selectedFile} title={item.title}/>
                 <div>
-                    <Button size="small" onClick={() => setCurrentId(item._id)}>
-                        <ModeEditOutlineIcon />
-                    </Button>
+                    <Typography variant="h6">{item.name}</Typography>
+                    <Typography variant="body2">{moment(item.createdAt).fromNow()}</Typography>
                 </div>
-            )}
-            <div>
-                <Typography variant="body2" color="textSecondary">{item.tags.map((tag) => `#${tag} `)}</Typography>
-            </div>
-            <Typography variant="h5" gutterBottom>{item.title}</Typography>
-            <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">{item.message}</Typography>
-            </CardContent>
+                {(user?.result?.googleId === item?.creator || user?.result?._id === item?.creator) && (
+                    <div>
+                        <Button size="small" onClick={() => setCurrentId(item._id)}>
+                            <ModeEditOutlineIcon />
+                        </Button>
+                    </div>
+                )}
+                <div>
+                    <Typography variant="body2" color="textSecondary">{item.tags.map((tag) => `#${tag} `)}</Typography>
+                </div>
+                <Typography variant="h5" gutterBottom>{item.title}</Typography>
+                <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">{item.message}</Typography>
+                </CardContent>
+            </ButtonBase>
             <CardActions>
                 <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likeItem(item._id)) }>
                     <Likes/>

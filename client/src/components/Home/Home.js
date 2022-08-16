@@ -20,9 +20,6 @@ const Home = () => {
     const [ search, setSearch ] = useState("");
     const [ tags, setTags ] = useState([]);
 
-    useEffect(() => {
-        dispatch(getItems());
-    }, [currentId, dispatch])
     
     const handleKeyPress = (e) => {
         if(e.keyCode === 13){
@@ -33,6 +30,7 @@ const Home = () => {
     const searchItem = () => {
         if(search.trim()){
             dispatch(getItemsBySearch({ search }));
+            navigate(`/items/search?searchQuery=${search || 'none'}`);
         } else {
             navigate('/');
         }
@@ -52,15 +50,17 @@ const Home = () => {
                                 label="Search Items"
                                 fullWidth
                                 value={search}
-                                onChange={(e) => setSearch(e.target.value)}
+                                onChange={(e) => setSearch(e.target.value.toLowerCase())}
                                 onKeyPress={handleKeyPress}
                             />
                             <Button onClick={searchItem} variant="contained" color="primary">Search</Button>
                         </AppBar>
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        <Paper elevation={6}>
-                            <Pagination/>
-                        </Paper>
+                        {(!searchQuery) && (
+                            <Paper elevation={6}>
+                                <Pagination page = {page} />
+                            </Paper>
+                        )}
                     </Grid>
                 </Grid>
             </Container>
