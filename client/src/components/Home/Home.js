@@ -34,6 +34,7 @@ const Home = () => {
         } else {
             navigate('/');
         }
+        setSearch('');
     }
     return(
         <Grow in>

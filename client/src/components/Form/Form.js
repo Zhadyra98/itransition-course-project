@@ -7,7 +7,7 @@ import { createItem, updateItem } from '../../actions/items'
 
 const Form = ({ currentId, setCurrentId }) => {
     const [ itemData, setItemData ] = useState({ title: '', message: '', tags: '', selectedFile: '' });
-    const item = useSelector((state) => currentId ? state.items.find((p) => p._id === currentId) : null);
+    const item = useSelector((state) => currentId ? state.items.items.find((p) => p._id === currentId) : null);
     const user = JSON.parse(localStorage.getItem('profile'));
     const dispatch = useDispatch();
 
