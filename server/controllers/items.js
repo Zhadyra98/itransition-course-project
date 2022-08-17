@@ -24,6 +24,20 @@ export const getItemsBySearch = async (req, res) => {
         const items = await ItemMessage.find({ $or:[ {title } , {message}]} );
         res.json({ data: items });
 
+        res.json({data: searchQuery});
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+
+export const getItem = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const item = await ItemMessage.findById(id);
+
+        res.status(200).json(item);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -75,5 +89,15 @@ export const likeItem = async (req, res) => {
         item.likes = item.likes.filter(_id => _id !== String(req.userId));
     }
     const updatedItem = await ItemMessage.findByIdAndUpdate(_id, item, { new: true });
+    res.json(updatedItem);
+}
+
+export const commentItem = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const item = await ItemMessage.findById(id);
+    item.comments.push(value);
+    const updatedItem = await ItemMessage.findByIdAndUpdate(id, item, { new: true });
     res.json(updatedItem);
 }
