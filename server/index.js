@@ -15,6 +15,10 @@ app.use(cors());
 app.use('/items', itemRoutes);
 app.use('/user', userRoutes);
 
+app.get("/", (req, res) => {
+    res.send("Welcome to our app ....")
+})
+
 const CONNECTION_URL = 'mongodb+srv://Zhadyra:itisNew123!@cluster0.x8rjlug.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000;
 
