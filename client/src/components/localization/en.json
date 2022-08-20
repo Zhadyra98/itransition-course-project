@@ -1,5 +1,15 @@
 {
     "search.text": "Search",
+    "logout.button" : "Logout",
+    "name.text" : "First Name",
+    "surname.text": "Last Name",
+    "email.text": "Email Address",
+    "password.text": "Password",
+    "confirmPass.text": "Confirm Password",
+    "register.button" : "Register",
+    "register.text" : "Create an account",
+    "login.text" : "Account Login",
     "login.button" : "Sign In",
-    "logout.button" : "Logout"
+    "toLogin.text" : "Already have an account",
+    "toRegister.text" : "Do not have an account"
 }

@@ -1,105 +1,84 @@
-// import React, {useState} from 'react'
-// import { Button, Container } from 'react-bootstrap'
-// import Input from './Input';
-// import { GoogleLogin } from 'react-google-login';
-// import FcGoogle from 'react-icons/fc'
-// import {gapi} from 'gapi-script';
-// import { useDispatch } from 'react-redux';
-// import { useNavigate } from "react-router-dom";
-// import { signin, signup } from '../../actions/auth';
+import React, {useState} from 'react'
+import Input from './Input';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { signin, signup } from '../../actions/auth';
+import { FormattedMessage } from "react-intl";
 
-// const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
 
-// export default function Auth() {
-//     const [ isSignup, setIsSignUp ] = useState(false);
-//     const [ showPassword, setShowPassword] = useState(false);
-//     const [ formData, setFormData ] = useState(initialState);
-//     const dispatch = useDispatch();
-//     const navigate = useNavigate();
-//     gapi.load("client:auth2", () => { gapi.client.init({ clientId: "491476052501-rrqj250v8jnmd58095hvdaqfpmkv3rpv.apps.googleusercontent.com", plugin_name: "chat", }); });
+export default function Auth() {
+    const [ isSignup, setIsSignUp ] = useState(false);
+    const [ showPassword, setShowPassword] = useState(false);
+    const [ formData, setFormData ] = useState(initialState);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     
-//     const handleShowPassword = () => {
-//         setShowPassword(prev => !prev);
-//     }
-//     const switchMode = () => { 
-//         setIsSignUp(prev => !prev);
-//         setShowPassword(false);
-//     }
-//     const handleChange = (e) => {
-//         setFormData({ ...formData, [e.target.name] : e.target.value })
-//     }
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         if(isSignup) {
-//             dispatch(signup(formData, navigate));
-//         } else {
-//             dispatch(signin(formData, navigate));
-//         }
-//     }
-//     const googleSuccess = async (res) => {
-//         const result = res?.profileObj;
-//         const token = res?.tokenId;
-//         try {
-//             dispatch({ type: 'AUTH', data: { result, token }});
-//             navigate('/');
-//         } catch (error){
-//             console.log(error);
-//         }
-//     }
-//     const googleFailure = (error) => {
-//         console.log(error);
-//         console.log("Google sign in was unsuccessfull. Try Again Later");
-//     }
-//     return (
-//         <Container component="main" maxWidth="xs">
-//             <Paper elevation={3}>
-//                 <Avatar>
-//                 </Avatar>
-//                 {isSignup? <h5>Sign Up</h5> : <h5>Sign In</h5>}
-//                 <form onSubmit={handleSubmit}>
-//                     <Grid container spacing={2}>
-//                         {
-//                             isSignup && (
-//                                 <>
-//                                     <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half/>
-//                                     <Input name="lastName" label="Last Name" handleChange={handleChange} half/>
-//                                 </>
-//                             ) 
-//                         }
-//                         <Input name="email" label="Email Address" handleChange={handleChange} type="email"/>
-//                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
-//                         { isSignup &&  <Input name="confirmPassword" label="Confirm Password" type="password" handleChange={handleChange}/> }
-//                     </Grid>
-//                     <Button type="submit" fullWidth variant='contained' color="primary">
-//                         { isSignup ? 'Sign Up' : 'Sign In'}
-//                     </Button>
-//                     <GoogleLogin
-//                         clientId='491476052501-rrqj250v8jnmd58095hvdaqfpmkv3rpv.apps.googleusercontent.com'
-//                         render={(renderProps) => (
-//                             <Button 
-//                                 color="primary" 
-//                                 fullWidth 
-//                                 onClick={renderProps.onClick} 
-//                                 disabled={renderProps.disabled} 
-//                                 startIcon={<FcGoogle />}
-//                                 variant="contained"
-//                             >
-//                                 Google Sign In
-//                             </Button>
-//                         )}
-//                         onSuccess={googleSuccess}
-//                         onFailure={googleFailure}
-//                         cookiePolicy="single_host_origin"
-//                     />
-//                     <Grid container justify="flex-end">
-//                         <Grid item>
-//                             <Button onClick={switchMode}>
-//                                 { isSignup ? 'Have an account, please Sign In' : 'Do not have an account, please Sign Up'}
-//                             </Button>
-//                         </Grid>
-//                     </Grid>
-//                 </form>
-//             </Paper>
-//         </Container>
-//     )
-// }
+    const handleShowPassword = () => {
+        setShowPassword(prev => !prev);
+    }
+    const switchMode = () => { 
+        setIsSignUp(prev => !prev);
+        setShowPassword(false);
+    }
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name] : e.target.value })
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(isSignup) {
+            dispatch(signup(formData, navigate));
+        } else {
+            dispatch(signin(formData, navigate));
+        }
+    }
+
+    return (
+            <div className='container'>
+                <div className="row justify-content-center align-items-center">
+                    <div className="col-9 col-xs-8 col-sm-7 col-md-6 col-lg-4 text-center">
+                        <h1 className='h2 mb-3 font-weight-normal'>{isSignup? <FormattedMessage id="register.text"/> : <FormattedMessage id="login.text" />}</h1>
+                        <form onSubmit={handleSubmit}>
+                            { isSignup && ( <>
+                                <FormattedMessage id="name.text">
+                                    {(msg) => (
+                                        <Input name="firstName" label={msg} handleChange={handleChange} autoFocus half/>
+                                    )}
+                                </FormattedMessage>
+                                <FormattedMessage id="surname.text">
+                                    {(msg) => (
+                                        <Input name="lastName" label={msg} handleChange={handleChange} half/>
+                                    )}
+                                </FormattedMessage>
+                            </>) }
+                            <FormattedMessage id="email.text">
+                                {(msg) => (
+                                    <Input name="email" label={msg} handleChange={handleChange} type="email"/>
+                                )}
+                            </FormattedMessage>
+                            <FormattedMessage id="password.text">
+                                {(msg) => (
+                                    <Input name="password" label={msg} handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword}/>
+                                )}
+                            </FormattedMessage>
+                            { isSignup &&  
+                                <FormattedMessage id="confirmPass.text">
+                                    {(msg) => (
+                                        <Input name="confirmPassword" label={msg} type="password" handleChange={handleChange}/> 
+                                    )}
+                                </FormattedMessage>
+                            }
+                            <div className="my-3">
+                                <button type="submit" className='btn btn-primary btn-lg w-100'>
+                                    {isSignup ? <FormattedMessage id="register.button"/> : <FormattedMessage id="login.button" />}
+                                </button>
+                            </div>
+                            <p onClick={switchMode} className="link-primary text-decoration-underline">
+                            { isSignup ? <FormattedMessage id='toLogin.text'/> : <FormattedMessage id='toRegister.text'/>}
+                            </p>
+                        </form>
+                    </div> 
+                </div>
+            </div>
+    )
+}

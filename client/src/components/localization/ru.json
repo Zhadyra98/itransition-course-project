@@ -1,5 +1,15 @@
 {
     "search.text": "Искать",
+    "logout.button" : "Выйти",
+    "name.text" : "Имя",
+    "surname.text": "Фамилия",
+    "email.text": "E-mail адрес",
+    "password.text": "Пароль",
+    "confirmPass.text": "Пароль ещё раз",
+    "register.button" : "Зарегистрироваться",
+    "register.text" : "Создайте аккаунт",
+    "login.text" : "Войти в аккаунт",
     "login.button" : "Войти",
-    "logout.button" : "Выйти"
+    "toLogin.text" : "или войдите в свой аккаунт",
+    "toRegister.text" : "Создать аккаунт"
 }

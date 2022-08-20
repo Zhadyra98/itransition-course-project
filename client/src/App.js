@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Container } from 'react-bootstrap'
 import Header from "./components/Header/Header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // // import Home from "./components/Home/Home";
-// // import Auth from "./components/Auth/Auth";
+import Auth from "./components/Auth/Auth";
 // // import ItemDetails from "./components/ItemDetails/ItemDetails";
 import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,7 +20,7 @@ const messages = {
 };
 
 const App = () => {
-    // const user = JSON.parse(localStorage.getItem('profile'));
+    const user = JSON.parse(localStorage.getItem('profile'));
     const [locale, setLocale] = useState(localStorage.getItem('app.locale') || locales.EN);
     const [ theme, setTheme ] = useState(localStorage.getItem('app.theme') || "dark");
 
@@ -51,15 +51,15 @@ const App = () => {
             <div className="App" id={theme}>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <BrowserRouter>
+                        <Header 
+                            locale={locale}
+                            setLocale={setCustomLocale}
+                            toggleTheme={toggleTheme}
+                            theme={theme}
+                        />
                         <Container>
-                            <Header 
-                                locale={locale}
-                                setLocale={setCustomLocale}
-                                toggleTheme={toggleTheme}
-                                theme={theme}
-                            />
                             <Routes>
-                                <Route />
+                                <Route path="/auth" exact element = {!user ? <Auth/> : <Navigate  to="/items" />}/>
                             </Routes>
                         </Container>
                     </BrowserRouter>
