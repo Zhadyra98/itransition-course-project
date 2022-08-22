@@ -1,26 +1,31 @@
-// import React from "react";
-// import { useSelector } from 'react-redux'
-// import Grid  from '@mui/material/Grid'
-// import CircularProgress from '@mui/material/CircularProgress'
+import React, {useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getItems } from "../../actions/items";
+import { TailSpin } from  'react-loader-spinner'
 
-// import Item from './Item/Item';
+import Item from './Item/Item';
 
-// const Items = ({ setCurrentId }) => {
-//     const { items, isLoading } = useSelector((state) => state.items);
+const Items = ({ setCurrentId }) => {
+    const { items, isLoading } = useSelector((state) => state.items);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getItems());
+    },[]);
 
-//     if(!items.length && !isLoading) return "No items";
+    if(!items.length && !isLoading) return "No items";
     
-//     return (
-//         isLoading ? <CircularProgress/> : (
-//         !items?.length ? <CircularProgress/> : (
-//             <Grid container alignItems="stretch" spacing={3}>
-//                 {items.map((item) => (
-//                     <Grid key={item._id} item xs={12} sm={12} md={6} lg={3}>
-//                         <Item item={item} setCurrentId={setCurrentId} />
-//                     </Grid>
-//                 ))}
-//             </Grid>
-//         )
-//     ))
-// }
-// export default Items;
+    return (
+        isLoading ? <TailSpin color = 'blue'/> : 
+        (
+        !items?.length ? <TailSpin color = 'blue'/> : (
+            <div>
+                {items.map((item) => (
+                    <div key={item._id}>
+                        <Item item={item} setCurrentId={setCurrentId} />
+                    </div>
+                ))}
+            </div>
+        )
+    ))
+}
+export default Items;

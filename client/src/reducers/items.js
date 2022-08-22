@@ -5,9 +5,7 @@ export default (state = { isLoading: true, items: [] }, action) => {
         case FETCH_ALL:
             return {
                 ...state,
-                items: action.payload.data,
-                currentPage: action.payload.currentPage,
-                numberOfPages: action.payload.numberOfPages,
+                items: action.payload.data
             }
         case FETCH_BY_SEARCH:
             return { ...state, items: action.payload };

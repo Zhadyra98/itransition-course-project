@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 export default function HeaderSearch() {
     return (
         <div className="me-auto d-flex">
-            <h4 className="mx-3">Collection</h4>
+            <h6 className="mx-3">Collections Management System</h6>
             <FormattedMessage id="search.text">
                 {(msg) => (
                     <Form.Control

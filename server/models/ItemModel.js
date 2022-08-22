@@ -6,7 +6,6 @@ const itemSchema = mongoose.Schema({
     name: String,
     creator: String,
     tags: [String],
-    selectedFile: String,
     likes: {
         type: [String],
         default: [],
@@ -21,6 +20,6 @@ const itemSchema = mongoose.Schema({
     },
 });
 
-const ItemMessage = mongoose.model('ItemMessage', itemSchema);
+const ItemModel = mongoose.model('ItemModel', itemSchema);
 
-export default ItemMessage;
+export default ItemModel;

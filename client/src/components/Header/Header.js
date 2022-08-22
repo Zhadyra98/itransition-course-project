@@ -11,9 +11,9 @@ const Header = ({ locale, setLocale, toggleTheme, theme }) => {
       <Container>
         <div className="d-flex">
           <HeaderSearch />
+          <HeaderButton />
           <HeaderLocale locale={locale} setLocale={setLocale} />
           <HeaderModeToggler toggleTheme={toggleTheme} theme={theme} />
-          <HeaderButton />
         </div>
       </Container>
     </header>

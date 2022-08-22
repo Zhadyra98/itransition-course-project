@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Container } from 'react-bootstrap'
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-// // import Home from "./components/Home/Home";
+import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
-// // import ItemDetails from "./components/ItemDetails/ItemDetails";
+//import ItemDetails from "./components/ItemDetails/ItemDetails";
 import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { IntlProvider } from "react-intl";
@@ -35,19 +35,6 @@ const App = () => {
         localStorage.setItem('app.theme', finalTheme);
     }
     return (
-        // <BrowserRouter>
-        //     <Container maxWidth="xl">
-        //         <Navbar/>
-        //         <Routes>
-        //             <Route path="/" exact element={<Navigate  to="/items" />}/>
-        //             <Route path= "/items" exact element={<Home/>}/>
-        //             <Route path= "/items/search" exact element={<Home/>}/>
-        //             <Route path= "/items/:id" exact element={<ItemDetails/>}/>
-        //             <Route path="/auth" exact element = {!user ? <Auth/> : <Navigate  to="/items" />}/>
-        //         </Routes>
-        //     </Container>
-        // </BrowserRouter>
-
             <div className="App" id={theme}>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <BrowserRouter>
@@ -59,6 +46,10 @@ const App = () => {
                         />
                         <Container>
                             <Routes>
+                                {/* <Route path="/" exact element={<Navigate  to="/items" />}/> */}
+                                <Route path= "/" exact element={<Home/>}/>
+                                <Route path= "/items/search" exact element={<Home/>}/>
+                                {/* <Route path= "/items/:id" exact element={<ItemDetails/>}/> */}
                                 <Route path="/auth" exact element = {!user ? <Auth/> : <Navigate  to="/items" />}/>
                             </Routes>
                         </Container>

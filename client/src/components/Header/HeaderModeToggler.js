@@ -4,13 +4,8 @@ import { MdLightMode, MdDarkMode } from 'react-icons/md';
 
 export default function HeaderModeToggler({ toggleTheme, theme }) {
     return (
-        <Form.Check 
-            className="my-auto"
-            type="switch"
-            id="custom-switch"
-            label = {theme === "dark" ? <MdDarkMode/> : <MdLightMode/>}
-            onChange={toggleTheme}
-            checked={theme === "dark"}
-        />
+        <div className='my-auto'>
+        {theme === "light" ? <MdDarkMode onClick={toggleTheme} size={30} /> : <MdLightMode onClick={toggleTheme} size={30} />}
+        </div>
     )
 }

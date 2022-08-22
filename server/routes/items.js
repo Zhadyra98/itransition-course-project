@@ -10,7 +10,7 @@ router.get('/search', getItemsBySearch);
 router.post('/', auth, createItem);
 router.patch('/:id', auth, updateItem);
 router.delete('/:id', auth, deleteItem);
-router.patch('/:id/likeItem', auth, likeItem);
+router.put('/:id/likeItem', auth, likeItem);
 router.post('/:id/commentItem', auth, commentItem);
 
 export default router;
