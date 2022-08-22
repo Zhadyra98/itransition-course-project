@@ -8,13 +8,20 @@ export const getCollections = async (req, res) => {
     } catch(error){
         res.json({ status: 'error', message: error.message})
     }
+    
 }
 
-export const createCollection = async (req, res) => {
-    const collection = req.body;
-    const newCollection = new CollectionModel({ ...collection, creator: req.user._id });
+export const createCollection =   async (req, res) => {
+    const { collectionName, description, collectionImage, topic } = req.body;
+    const collection = {
+        collectionName, 
+        description, 
+        collectionImage, 
+        topic, 
+        creator: req.userId,
+    };
     try {
-        await newCollection.save();
+        const newCollection = await CollectionModel.create(collection);
         res.json({ status: 'ok', newCollection});
     } catch(error) {
         res.json({ status: 'error', message: error.message })

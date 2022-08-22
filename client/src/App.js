@@ -4,6 +4,8 @@ import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
+import Collections from "./components/Collections/Collections";
+import CollectionForm from "./components/Form/CollectionForm";
 //import ItemDetails from "./components/ItemDetails/ItemDetails";
 import "./styles.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -48,7 +50,9 @@ const App = () => {
                             <Routes>
                                 {/* <Route path="/" exact element={<Navigate  to="/items" />}/> */}
                                 <Route path= "/" exact element={<Home/>}/>
+                                <Route path= "/collections" exact element={<Collections/>}/>
                                 <Route path= "/items/search" exact element={<Home/>}/>
+                                <Route path= "/collections/createCollection" exact element={<CollectionForm/>}/>
                                 {/* <Route path= "/items/:id" exact element={<ItemDetails/>}/> */}
                                 <Route path="/auth" exact element = {!user ? <Auth/> : <Navigate  to="/items" />}/>
                             </Routes>

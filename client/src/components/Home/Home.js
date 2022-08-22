@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Items from "../Items/Items";
-import Form from "../Form/Form";
 import { useDispatch } from "react-redux";
 import { getItemsBySearch } from '../../actions/items';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const [ currentId, setCurrentId ] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [ search, setSearch ] = useState("");
@@ -30,8 +28,8 @@ const Home = () => {
     return(
         <div>
             <>Main page </>
-            {/* <div>
-                <Items setCurrentId={setCurrentId} />
+            <div>
+                <Items />
             </div>
             <div>
                 <input
@@ -43,8 +41,7 @@ const Home = () => {
                     onKeyPress={handleKeyPress}
                 />
                 <button onClick={searchItem} variant="contained" color="primary">Search</button>
-                <Form currentId={currentId} setCurrentId={setCurrentId} />
-            </div> */}
+            </div>
         </div>
     )
 }

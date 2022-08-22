@@ -11,5 +11,10 @@
     "login.text" : "Войти в аккаунт",
     "login.button" : "Войти",
     "toLogin.text" : "или войдите в свой аккаунт",
-    "toRegister.text" : "Создать аккаунт"
+    "toRegister.text" : "Создать аккаунт",
+    "createCollection.text" : "Создайте новую коллекцию",
+    "collectionName.text" : "Название коллекции",
+    "topic.text" : "Тематика коллекции",
+    "description.text" : "Описание",
+    "createCollection.button" : "Создать коллекцию"
 }

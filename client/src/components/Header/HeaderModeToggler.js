@@ -1,5 +1,4 @@
 import React from 'react'
-import Form from 'react-bootstrap/Form';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 
 export default function HeaderModeToggler({ toggleTheme, theme }) {

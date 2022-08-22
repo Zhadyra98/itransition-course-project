@@ -5,11 +5,12 @@ import { TailSpin } from  'react-loader-spinner'
 
 import Item from './Item/Item';
 
-const Items = ({ setCurrentId }) => {
+const Items = () => {
     const { items, isLoading } = useSelector((state) => state.items);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getItems());
+        // eslint-disable-next-line
     },[]);
 
     if(!items.length && !isLoading) return "No items";
@@ -21,7 +22,7 @@ const Items = ({ setCurrentId }) => {
             <div>
                 {items.map((item) => (
                     <div key={item._id}>
-                        <Item item={item} setCurrentId={setCurrentId} />
+                        <Item item={item} />
                     </div>
                 ))}
             </div>

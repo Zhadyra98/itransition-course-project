@@ -11,5 +11,10 @@
     "login.text" : "Account Login",
     "login.button" : "Sign In",
     "toLogin.text" : "Already have an account",
-    "toRegister.text" : "Do not have an account"
+    "toRegister.text" : "Do not have an account",
+    "createCollection.text" : "Create New Collection",
+    "collectionName.text" : "Collection Name",
+    "topic.text" : "Collection Topic",
+    "description.text" : "Description",
+    "createCollection.button" : "Create Collection"
 }

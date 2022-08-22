@@ -31,6 +31,7 @@ export default function Auth() {
         } else {
             dispatch(signin(formData, navigate));
         }
+        setFormData(initialState);
     }
 
     return (

@@ -25,7 +25,7 @@ export const getItem = (id) =>  async (dispatch) => {
 export const getItems = () =>  async (dispatch) => {
     try {
         dispatch({type: START_LOADING});
-        const req = await fetch("http://localhost:5000/items",{
+        const req = await fetch(`${BASE_URL}/items`,{
             headers: setHeaders({})});
         const data = await req.json();
         if(data.status === "ok"){ 
@@ -53,7 +53,7 @@ export const getItemsBySearch = (searchQuery) => async (dispatch) => {
 export const createItem = (item) => async (dispatch) => {
     try {
         dispatch({type: START_LOADING});
-        const req = await fetch("http://localhost:5000/items",{
+        const req = await fetch(`${BASE_URL}/items`,{
             headers: setHeaders({
                 'Content-Type': 'application/json',
             }),
@@ -82,7 +82,7 @@ export const updateItem = (id, item) => async (dispatch) => {
 
 export const deleteItem = (id) => async (dispatch) => {
     try{
-        const response = await fetch(`http://localhost:5000/items/${id}`,{
+        const response = await fetch(`${BASE_URL}/items/${id}`,{
             method: 'DELETE', 
             headers: setHeaders({
                 'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export const deleteItem = (id) => async (dispatch) => {
 
 export const likeItem = (id) => async (dispatch) => {
     try{
-        const response = await fetch(`http://localhost:5000/items/${id}/likeItem`,{
+        const response = await fetch(`${BASE_URL}/items/${id}/likeItem`,{
             method: 'PUT', 
             headers: setHeaders({
                 'Content-Type': 'application/json',

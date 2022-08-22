@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const collectionSchema = mongoose.Schema({
-    name : String,
+    collectionName : String,
     description : String,
     topic : String,
-    image : String,
+    collectionImage : String,
     creator: { type: mongoose.Schema.ObjectId, ref: 'User'},
 });
 
