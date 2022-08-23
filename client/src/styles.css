@@ -7,3 +7,27 @@
 #dark Button{
     background-color:beige;
 }
+.collection-item-container{
+    height: 260px;
+    width: 100%;
+}
+.collection-item-image-container{
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+.collection-plus-container{
+    line-height: 200px;
+    height: 230px;
+    width: 100%;
+}
+.collections-add-sign{
+    font-size: 140px;
+}
+.collection-list-img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}

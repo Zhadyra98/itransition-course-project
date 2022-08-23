@@ -35,7 +35,6 @@ export const getItem = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
-
 }
 
 export const createItem = async (req, res) => {

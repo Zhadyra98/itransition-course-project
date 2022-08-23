@@ -9,7 +9,7 @@ import { deleteItem, likeItem  } from "../../../actions/items";
 const Item = ({ item, setCurrentId }) => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
-    const naviagte = useNavigate();
+    const navigate = useNavigate();
     const [ likes, setLikes ] = useState(item?.likes);
 
     const userId = user?.result?.googleId || user?.result?._id;
@@ -37,7 +37,7 @@ const Item = ({ item, setCurrentId }) => {
     }
 
     const openItem = () => {
-        naviagte(`/items/${item._id}`);
+        navigate(`/items/${item._id}`);
     }
     return (
         <div>  

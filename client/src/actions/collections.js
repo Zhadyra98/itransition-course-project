@@ -1,4 +1,4 @@
-import { FETCH_ALL_COLLECTIONS, CREATE_COLLECTION, BASE_URL, START_LOADING, END_LOADING } from '../components/constants/collectionActionTypes';
+import { FETCH_ALL_COLLECTIONS, CREATE_COLLECTION, BASE_URL, START_LOADING, END_LOADING, FETCH_COLLECTION } from '../components/constants/collectionActionTypes';
 
 function setHeaders(headers) {
     if(localStorage.getItem('profile')) {
@@ -40,6 +40,20 @@ export const createCollection = ({ collectionName, topic, description, collectio
         if(data.status === "ok"){ 
             dispatch({ type: CREATE_COLLECTION, payload: data.newCollection });
         }
+    } catch (error) {
+        console.log(error); 
+    }
+}
+
+export const getCollection = (id) =>  async (dispatch) => {
+    try {
+        dispatch({type: START_LOADING});
+        const req = await fetch(`${BASE_URL}/collections/${id}`,{
+            headers: setHeaders({})});
+        const data = await req.json();
+        dispatch({ type: FETCH_COLLECTION, payload: data });
+        
+        dispatch({type: END_LOADING})
     } catch (error) {
         console.log(error); 
     }

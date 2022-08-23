@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Container } from 'react-bootstrap'
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Home/Home";
@@ -37,7 +36,7 @@ const App = () => {
         localStorage.setItem('app.theme', finalTheme);
     }
     return (
-            <div className="App" id={theme}>
+            <div id={theme}>
                 <IntlProvider locale={locale} messages={messages[locale]}>
                     <BrowserRouter>
                         <Header 
@@ -46,17 +45,15 @@ const App = () => {
                             toggleTheme={toggleTheme}
                             theme={theme}
                         />
-                        <Container>
-                            <Routes>
-                                {/* <Route path="/" exact element={<Navigate  to="/items" />}/> */}
-                                <Route path= "/" exact element={<Home/>}/>
-                                <Route path= "/collections" exact element={<Collections/>}/>
-                                <Route path= "/items/search" exact element={<Home/>}/>
-                                <Route path= "/collections/createCollection" exact element={<CollectionForm/>}/>
-                                {/* <Route path= "/items/:id" exact element={<ItemDetails/>}/> */}
-                                <Route path="/auth" exact element = {!user ? <Auth/> : <Navigate  to="/items" />}/>
-                            </Routes>
-                        </Container>
+                        <Routes>
+                            <Route path= "/" exact element={<Home/>}/>
+                            <Route path= "/collections" exact element={<Collections/>}/>
+                            <Route path= "/items/search" exact element={<Home/>}/>
+                            <Route path= "/collections/createCollection" exact element={<CollectionForm mode="create"/>}/>
+                            <Route path= "/collections/:id" exact element={<CollectionForm mode="detail"/>}/>
+                            {/* <Route path= "/items/:id" exact element={<ItemDetails/>}/> */}
+                            <Route path="/auth" exact element = {!user ? <Auth/> : <Navigate  to="/items"/> }/>
+                        </Routes>
                     </BrowserRouter>
                 </IntlProvider>
             </div>
